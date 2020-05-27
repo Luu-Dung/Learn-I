@@ -1,0 +1,5 @@
+#Kbuild
+EXTRA_CFLAGS = -Wall
+
+obj-m = example_driver.o
+

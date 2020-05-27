@@ -7,10 +7,21 @@
  */
 
 #include <linux/module.h> /* thu vien nay dinh nghia cac macro nhu module_init va module_exit */
+#include <linux/fs.h> // Define allocate/free device number Function!
 
-#define DRIVER_AUTHOR "Nguyen Tien Dat <dat.a3cbq91@gmail.com>"
+#define DRIVER_AUTHOR "Nhat Le <nhatmt95@gmail.com>"
 #define DRIVER_DESC   "A sample character device driver"
-#define DRIVER_VERSION "0.1"
+#define DRIVER_VERSION "0.3"
+#define Dynamically
+
+/****************************** Driver Structs *****************************/
+
+struct _vchar_drv {
+	dev_t dev_num;
+} vchar_drv;
+
+
+
 
 /****************************** device specific - START *****************************/
 /* ham khoi tao thiet bi */
@@ -35,8 +46,23 @@
 /* ham khoi tao driver */
 static int __init vchar_driver_init(void)
 {
-	/* cap phat device number */
+	int ret = 0;
 
+	/* cap phat device number */
+#ifdef Dynamically
+	vchar_drv.dev_num = 0;
+	ret = alloc_chrdev_region(&vchar_drv.dev_num,0,1, "Name_device");
+#else /* Statically */
+	vchar_drv.dev_num = MKDEV(235,0);
+	ret = register_chrdev_region(vchar_drv.dev_num,1, "Name_device");
+#endif
+
+	if (ret < 0){
+		printk("failed to register device number\n");
+		goto failed_register_devnum;
+	}
+	printk("allocated device number (%d,%d)\n", MAJOR(vchar_drv.dev_num), MINOR(vchar_drv.dev_num));
+	
 	/* tao device file */
 
 	/* cap phat bo nho cho cac cau truc du lieu cua driver va khoi tao */
@@ -49,6 +75,9 @@ static int __init vchar_driver_init(void)
 
 	printk("Initialize vchar driver successfully\n");
 	return 0;
+
+failed_register_devnum:
+	return ret;
 }
 
 /* ham ket thuc driver */
@@ -65,6 +94,7 @@ static void __exit vchar_driver_exit(void)
 	/* xoa bo device file */
 
 	/* giai phong device number */
+	unregister_chrdev_region(vchar_drv.dev_num,1);
 
 	printk("Exit vchar driver\n");
 }

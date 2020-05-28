@@ -9,38 +9,77 @@
 #include <linux/module.h> /* thu vien nay dinh nghia cac macro nhu module_init va module_exit */
 #include <linux/fs.h> // Define allocate/free device number Function!
 #include <linux/device.h> // Provide the creating device file function.
+#include <linux/slab.h> // Provide the kmalloc & free function
+
+#include "vchar_device.h" // Device register description
+
 #define DRIVER_AUTHOR "Nhat Le <nhatmt95@gmail.com>"
 #define DRIVER_DESC   "A sample character device driver"
-#define DRIVER_VERSION "0.4"
+#define DRIVER_VERSION "0.5"
 #define Dynamically
 
 /****************************** Driver Structs *****************************/
+// Hardware struct
+typedef struct vchar_dev {
+	unsigned char * control_regs;
+	unsigned char * status_regs;
+	unsigned char * data_regs;
+} vchar_dev_t;
 
+
+
+// OS struct
 struct _vchar_drv {
 	dev_t dev_num;
 	struct class *dev_class;
 	struct device *dev;
+	vchar_dev_t *vchar_hw;
 } vchar_drv;
 
 
 
 
 /****************************** device specific - START *****************************/
-/* ham khoi tao thiet bi */
+/* A. ham khoi tao thiet bi */
+int vchar_hw_init(vchar_dev_t *hw){
+	char *buf;
+	buf = kzalloc(NUM_DEV_REGS*REG_SIZE, GFP_KERNEL);
+	if(!buf){
+		return -ENOMEM;
+	}
 
-/* ham giai phong thiet bi */
+	hw->control_regs = buf;
+	hw->status_regs = hw->control_regs + NUM_CTRL_REGS;
+	hw->data_regs = hw->status_regs + NUM_STS_REGS;
 
-/* ham doc tu cac thanh ghi du lieu cua thiet bi */
+	// khoi tao gia tri ban dau cho cac thanh ghi
+	hw->control_regs[CONTROL_ACCESS_REG] = 0x03;
+	hw->status_regs[DEVICE_STATUS_REG] = 0x03;
 
-/* ham ghi vao cac thanh ghi du lieu cua thiet bi */
+	return 0;
+}
 
-/* ham doc tu cac thanh ghi trang thai cua thiet bi */
+/* B. ham giai phong thiet bi */
+void vchar_hw_exit(vchar_dev_t *hw){
+	kfree(hw->control_regs);
+}
 
-/* ham ghi vao cac thanh ghi dieu khien cua thiet bi */
+/* C. ham doc tu cac thanh ghi du lieu cua thiet bi */
 
-/* ham xu ly tin hieu ngat gui tu thiet bi */
+
+
+/* D. ham ghi vao cac thanh ghi du lieu cua thiet bi */
+
+/* E. ham doc tu cac thanh ghi trang thai cua thiet bi */
+
+/* F. ham ghi vao cac thanh ghi dieu khien cua thiet bi */
+
+/* G. ham xu ly tin hieu ngat gui tu thiet bi */
 
 /******************************* device specific - END *****************************/
+
+
+
 
 /******************************** OS specific - START *******************************/
 /* cac ham entry points */
@@ -85,15 +124,30 @@ static int __init vchar_driver_init(void)
 	}
 
 	/* 3. cap phat bo nho cho cac cau truc du lieu cua driver va khoi tao */
+	vchar_drv.vchar_hw = kzalloc(sizeof(vchar_dev_t), GFP_KERNEL);
+	if(!vchar_drv.vchar_hw){
+		printk("failed to alloocate data structure for hardware\n");
+		ret = -ENOMEM;
+		goto failed_allocate_structure;
+	}
 
 	/* 4. khoi tao thiet bi vat ly */
-
+	ret = vchar_hw_init(vchar_drv.vchar_hw);
+	if(ret < 0){
+		printk("failed to initialize a virtual character device\n");
+		goto failed_init_hw;
+	}
 	/* 5. dang ky cac entry point voi kernel */
 
 	/* 6. dang ky ham xu ly ngat */
 
 	printk("Initialize vchar driver successfully\n");
 	return 0;
+
+failed_init_hw:
+	kfree(vchar_drv.vchar_hw);
+failed_allocate_structure:
+	device_destroy(vchar_drv.dev_class, vchar_drv.dev_num);
 failed_create_device:
 	class_destroy(vchar_drv.dev_class);
 failed_create_class:
@@ -112,7 +166,7 @@ static void __exit vchar_driver_exit(void)
 	/* huy dang ky entry point voi kernel */
 
 	/* giai phong thiet bi vat ly */
-
+	vchar_hw_exit(vchar_drv.vchar_hw);
 	/* giai phong bo nho da cap phat cau truc du lieu cua driver */
 
 	/* xoa bo device file */

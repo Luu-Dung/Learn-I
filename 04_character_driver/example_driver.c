@@ -10,12 +10,14 @@
 #include <linux/fs.h> // Define allocate/free device number Function!
 #include <linux/device.h> // Provide the creating device file function.
 #include <linux/slab.h> // Provide the kmalloc & free function
+#include <linux/cdev.h> // Provide cdev's function.
+#include <linux/uaccess.h> // Provide comunicate between user and kernel.
 
 #include "vchar_device.h" // Device register description
 
 #define DRIVER_AUTHOR "Nhat Le <nhatmt95@gmail.com>"
 #define DRIVER_DESC   "A sample character device driver"
-#define DRIVER_VERSION "0.5"
+#define DRIVER_VERSION "0.7"
 #define Dynamically
 
 /****************************** Driver Structs *****************************/
@@ -34,6 +36,8 @@ struct _vchar_drv {
 	struct class *dev_class;
 	struct device *dev;
 	vchar_dev_t *vchar_hw;
+	struct cdev *vcdev;
+	unsigned int open_cnt;
 } vchar_drv;
 
 
@@ -56,6 +60,8 @@ int vchar_hw_init(vchar_dev_t *hw){
 	hw->control_regs[CONTROL_ACCESS_REG] = 0x03;
 	hw->status_regs[DEVICE_STATUS_REG] = 0x03;
 
+
+
 	return 0;
 }
 
@@ -65,11 +71,79 @@ void vchar_hw_exit(vchar_dev_t *hw){
 }
 
 /* C. ham doc tu cac thanh ghi du lieu cua thiet bi */
+static int vchar_hw_read_data(vchar_dev_t *hw, int start_regs, int num_regs, char *kbuf){
+	int read_bytes = num_regs*REG_SIZE;
 
+	// Check reading permission.
+	if((hw->control_regs[CONTROL_ACCESS_REG]&CTRL_READ_DATA_BIT) == DISABLE){
+		return -1;
+	}
+
+	// check kernel buffer.
+	if(!kbuf){
+		return -1;
+	}
+
+	// check the validity of the start register.
+	if(start_regs > NUM_DATA_REGS){
+		return -1;
+	}
+
+	// Adjust number of reading register.
+	if(num_regs > (NUM_DATA_REGS - start_regs)){
+		read_bytes = (NUM_DATA_REGS - start_regs)*REG_SIZE;
+	}
+
+	// Copy data from data_regs to kernel buffer.
+	/* Do char device của chúng ta là một thiết bị giả lập trên RAM, 
+	nên ta chỉ cần dùng hàm memcpy là đã có thể đọc dữ liệu từ buffer của 
+	char device lên kernel buffer.
+	 Nếu char device của chúng ta là một thiết bị I2C, chúng ta phải dùng hàm khác như i2c_read_byte chẳng hạn...*/
+	memcpy(kbuf,hw->data_regs+start_regs, read_bytes);
+
+	// Update number of read data_reg.
+	hw->status_regs[READ_COUNT_L_REG] +=1;
+	if(hw->status_regs[READ_COUNT_L_REG] == 0){
+		hw->status_regs[READ_COUNT_H_REG] +=1;
+	}
+
+	// RETURN read bytes
+	return read_bytes;
+}
 
 
 /* D. ham ghi vao cac thanh ghi du lieu cua thiet bi */
+static int vchar_hw_write_data(vchar_dev_t *hw, int start_reg, int num_regs, char *kbuf){
+	int write_byte = num_regs;
 
+	// check write permission.
+	if((hw->control_regs[CONTROL_ACCESS_REG]&CTRL_WRITE_DATA_BIT) == DISABLE){
+		return -1;
+	}
+
+	// check kernel buffer.
+	if(!kbuf){
+		return -2;
+	}
+
+	// check the validity of registers writen.
+	if(num_regs > (NUM_DATA_REGS - start_reg)){
+		write_byte = NUM_DATA_REGS - start_reg;
+		hw->status_regs[DEVICE_STATUS_REG] |= STS_DATAREGS_OVERFLOW_BIT;
+	}
+
+	// Copy data from kernel buffer to data_regs of device.
+	memcpy(hw->data_regs+start_reg, kbuf, write_byte);
+
+	// Update number of writing register.
+	hw->status_regs[WRITE_COUNT_L_REG] +=1;
+	if(hw->status_regs[WRITE_COUNT_L_REG] == 0){
+		hw->status_regs[WRITE_COUNT_H_REG] +=1;
+	}
+
+	// Return number of writing byte.
+	return write_byte;
+}
 /* E. ham doc tu cac thanh ghi trang thai cua thiet bi */
 
 /* F. ham ghi vao cac thanh ghi dieu khien cua thiet bi */
@@ -83,6 +157,75 @@ void vchar_hw_exit(vchar_dev_t *hw){
 
 /******************************** OS specific - START *******************************/
 /* cac ham entry points */
+static int vchar_driver_open(struct inode *inode, struct file *flip){
+	vchar_drv.open_cnt++;
+	printk("Handle opened event (%d)\n", vchar_drv.open_cnt);
+	return 0;
+}
+
+static int vchar_driver_release(struct inode *inode, struct file *flip){
+	printk("Handle closed event\n");
+	return 0;
+}
+
+static ssize_t vchar_driver_read(struct file *filp, char __user *user_buf, size_t len, loff_t *off)
+{
+	char *kernel_buf = NULL;
+	int num_bytes = 0;
+
+	printk("Handle read event start from %lld, %zu bytes\n", *off, len);
+
+	kernel_buf = kzalloc(len, GFP_KERNEL);
+	if(!kernel_buf){
+		return 0;
+	}
+
+	num_bytes = vchar_hw_read_data(vchar_drv.vchar_hw, *off, len, kernel_buf);
+	printk("read %d bytes from HW\n", num_bytes);
+
+	if(num_bytes < 0){
+		return -EFAULT;
+	}
+
+	if(copy_to_user(user_buf, kernel_buf, num_bytes)){
+		return -EFAULT;
+	}
+
+	*off +=num_bytes;
+	return num_bytes;
+}
+
+static ssize_t vchar_driver_write(struct file *filp, const char __user *user_buf, size_t len, loff_t *off)
+{
+	char *kernel_buf = NULL;
+	int num_bytes = 0;
+	printk("Handle write envent start from %lld, %zu bytes\n", *off, len);
+
+	kernel_buf = kzalloc(len, GFP_KERNEL);
+	if(copy_from_user(kernel_buf, user_buf, len)){
+		return -EFAULT;
+	}
+
+	num_bytes = vchar_hw_write_data(vchar_drv.vchar_hw, *off, len, kernel_buf);
+	printk("writes %d bytes to HW\n", num_bytes);
+
+	if(num_bytes <0){
+		return -EFAULT;
+	}
+
+	*off += num_bytes;
+	return num_bytes;
+}
+
+
+static struct file_operations fops = {
+	.owner = THIS_MODULE,
+	.open = vchar_driver_open,
+	.release = vchar_driver_release,
+	.read = vchar_driver_read,
+	.write = vchar_driver_write,
+
+};
 
 /* ham khoi tao driver */
 static int __init vchar_driver_init(void)
@@ -138,12 +281,23 @@ static int __init vchar_driver_init(void)
 		goto failed_init_hw;
 	}
 	/* 5. dang ky cac entry point voi kernel */
-
+	vchar_drv.vcdev = cdev_alloc();
+	if (vchar_drv.vcdev == NULL){
+		printk("failed to allocate cdev structure\n");
+		goto failed_allocate_cdev;
+	}
+	cdev_init(vchar_drv.vcdev, &fops);
+	ret = cdev_add(vchar_drv.vcdev, vchar_drv.dev_num, 1);
+	if(ret < 0){
+		printk("failed to add a char device to the system\n");
+		goto failed_allocate_cdev;
+	}
 	/* 6. dang ky ham xu ly ngat */
 
 	printk("Initialize vchar driver successfully\n");
 	return 0;
-
+failed_allocate_cdev:
+	vchar_hw_exit(vchar_drv.vchar_hw);
 failed_init_hw:
 	kfree(vchar_drv.vchar_hw);
 failed_allocate_structure:
@@ -164,6 +318,7 @@ static void __exit vchar_driver_exit(void)
 	/* huy dang ky xu ly ngat */
 
 	/* huy dang ky entry point voi kernel */
+	cdev_del(vchar_drv.vcdev);
 
 	/* giai phong thiet bi vat ly */
 	vchar_hw_exit(vchar_drv.vchar_hw);

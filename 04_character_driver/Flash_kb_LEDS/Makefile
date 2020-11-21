@@ -1,9 +1,18 @@
-#Makefile
+# Run this Makefile as follows:
+# (MAKE) -C $(KDIR) SUBDIRS=$(PWD) modules
+#
 
-KDIR = /lib/modules/`uname -r`/build
+KDIR= /lib/modules/$(shell uname -r)/build
+
+obj-m := kbleds.o
 
 all:
-	make -C $(KDIR) M=`pwd`
+$(MAKE) -C $(KDIR) SUBDIRS=$(PWD) modules
+
+install:
+$(MAKE) -C $(KDIR) SUBDIRS=$(PWD) modules_install
+depmod -a
 
 clean:
-	make -C $(KDIR) M=`pwd` clean
+rm -f *~
+$(MAKE) -C $(KDIR) SUBDIRS=$(PWD) clean

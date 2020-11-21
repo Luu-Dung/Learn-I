@@ -1,0 +1,49 @@
+kernel/fs/quota/quota_v1.ko:
+kernel/fs/quota/quota_v2.ko: kernel/fs/quota/quota_tree.ko
+kernel/fs/quota/quota_tree.ko:
+kernel/crypto/seqiv.ko:
+kernel/crypto/ctr.ko:
+kernel/crypto/ccm.ko:
+kernel/crypto/arc4.ko:
+kernel/crypto/michael_mic.ko:
+kernel/crypto/ansi_cprng.ko:
+kernel/block/test-iosched.ko:
+kernel/drivers/net/phy/at803x.ko:
+kernel/drivers/net/phy/qca8337.ko:
+kernel/drivers/net/ethernet/qualcomm/emac/qcom_emac.ko: kernel/drivers/net/phy/qca8337.ko
+kernel/drivers/net/wireless/ti/wlcore/wlcore.ko: kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko
+kernel/drivers/net/wireless/ti/wlcore/wlcore_sdio.ko:
+kernel/drivers/net/wireless/ti/wl18xx/wl18xx.ko: kernel/drivers/net/wireless/ti/wlcore/wlcore.ko kernel/net/mac80211/mac80211.ko kernel/net/wireless/cfg80211.ko
+kernel/drivers/net/wireless/hostap/hostap.ko: kernel/net/wireless/lib80211.ko
+kernel/drivers/net/wireless/cnss/cnss_common.ko: kernel/net/wireless/cfg80211.ko
+kernel/drivers/net/wireless/cnss_crypto/cnss_secif.ko:
+kernel/drivers/usb/serial/usbserial.ko:
+kernel/drivers/usb/serial/ftdi_sio.ko: kernel/drivers/usb/serial/usbserial.ko
+kernel/drivers/input/misc/gpio_event.ko:
+kernel/drivers/input/misc/gpio_matrix.ko:
+kernel/drivers/input/misc/gpio_input.ko:
+kernel/drivers/input/misc/gpio_output.ko:
+kernel/drivers/input/misc/gpio_axis.ko:
+kernel/drivers/mmc/card/mmc_test.ko:
+kernel/drivers/mmc/card/mmc_block_test.ko: kernel/block/test-iosched.ko
+kernel/drivers/iio/imu/bmi160/bmi160.ko:
+kernel/drivers/bluetooth/hci_vhci.ko: kernel/net/bluetooth/bluetooth.ko
+kernel/drivers/bluetooth/hci_uart.ko: kernel/net/bluetooth/bluetooth.ko
+kernel/drivers/bluetooth/btusb.ko: kernel/drivers/bluetooth/ath3k.ko kernel/net/bluetooth/bluetooth.ko
+kernel/drivers/bluetooth/btsdio.ko: kernel/net/bluetooth/bluetooth.ko
+kernel/drivers/bluetooth/ath3k.ko: kernel/net/bluetooth/bluetooth.ko
+kernel/drivers/bluetooth/bluetooth-power.ko:
+kernel/net/netfilter/xt_physdev.ko:
+kernel/net/wireless/cfg80211.ko:
+kernel/net/wireless/lib80211.ko:
+kernel/net/wireless/lib80211_crypt_wep.ko: kernel/net/wireless/lib80211.ko
+kernel/net/wireless/lib80211_crypt_ccmp.ko: kernel/net/wireless/lib80211.ko
+kernel/net/wireless/lib80211_crypt_tkip.ko: kernel/net/wireless/lib80211.ko
+kernel/net/bluetooth/bluetooth.ko:
+kernel/net/bluetooth/rfcomm/rfcomm.ko: kernel/net/bluetooth/bluetooth.ko
+kernel/net/bluetooth/bnep/bnep.ko: kernel/net/bluetooth/bluetooth.ko
+kernel/net/bluetooth/hidp/hidp.ko: kernel/net/bluetooth/bluetooth.ko
+kernel/net/mac80211/mac80211.ko: kernel/net/wireless/cfg80211.ko
+kernel/lib/crc7.ko:
+extra/embms_kernel.ko:
+extra/wlan.ko: kernel/net/wireless/cfg80211.ko

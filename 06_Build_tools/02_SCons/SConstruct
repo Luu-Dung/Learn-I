@@ -1,0 +1,39 @@
+#================== BUILD PROGRAM =======================
+#TYPE1
+#Program('bin',['main.c','hello.c'])
+
+
+#TYPE2
+#Program('bin',Glob('*.c'))
+
+#TYPE3
+#Program('bin', Split('main.c hello.c'))
+
+
+#TYPE4
+#common_src = ['main.c']
+#common_src += ['hello.c']
+
+#Program('bin', common_src)
+#Program(source = common_src, target = 'bin')
+#Program(target = 'bin', source = common_src)
+
+
+
+
+
+#================== BUILD LIBRARY =======================
+# Static Libraries
+#Library('hello', ['hello.c'])
+#StaticLibrary('hello', ['hello.c'])
+
+
+# Dynamic Libraries
+SharedLibrary('hello', ['hello.c'])
+
+
+#== Build program ==
+Program('bin','main.c', LIBS=['hello'], LIBPATH=['./'])
+
+#NOTE: execute a Binary file link to Dynamic libraries
+# $ LD_LIBRARY_PATH=path_to_.so_file ./bin

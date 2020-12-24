@@ -1,0 +1,9 @@
+
+CURRENT DIR
+|
+|___ linux-raspberrypi-kernel_1.20200811-1 (Deleted)
+|      download from (https://github.com/raspberrypi/linux/releases) acording date.
+|
+|___ tools-master (Deleted): download from (git clone https://github.com/raspberrypi/tools).
+|
+|___ .config : get from rasp board (Linux raspberrypi 5.4.51-v7+ #1333 SMP Mon Aug 10 16:45:19 BST 2020 armv7l GNU/Linux).

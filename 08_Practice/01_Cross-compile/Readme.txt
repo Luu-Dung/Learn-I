@@ -8,6 +8,7 @@ I. Prepare Resource
 	- git clone https://github.com/raspberrypi/linux -> git checkout <version> (Raspberry).
 	- git clone git://github.com/beagleboard/kernel.git -> git checkout <version> (Beagle black).
 	- so on,...
+	- you can get kernel (compiled) in your yocto dir by searching where Module.symvers is.
 
 
   2. Toolchain:
@@ -34,9 +35,22 @@ NOTE:
   Check "uname -m" on Board:
 	- Choose excatly kernel version.
 	- Choose excatly toolchain (32 or 64bit, half-float or NOT).
-	- Find config file ( /proc/config.gz or /boot/config*).
 	- Apply config exactly (avoid error module_layout).
 	- Choose exactly ARCH.
+	- Find config file ( /proc/config.gz or /boot/config*):
+	  + Option1:
+	     source code of your booted system
+		$ cd /usr/src/linux-headers-<ver>;
+	     this will generate .config
+		$ sudo make oldconfig; 
+		$ vi .config
+
+	  + Option2:
+		$ zcat /proc/config.gz > my_config
+
+	  + Option3:
+		$ echo /boot/config* > my_config
+
 
 ===============================================================================================
 B. REFER:

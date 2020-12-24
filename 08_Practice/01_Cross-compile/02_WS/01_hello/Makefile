@@ -13,4 +13,4 @@ yocto:
 	make ARCH=arm CROSS_COMPILE=$(CROSS_COMP) -C $(KERNEL_yocto_DIR) SUBDIRS=$(PWD) modules
 
 clean:
-	 make -C $(KERNEL_DIR) SUBDIRS=$(PWD) clean
+	 make -C $(KERNEL_yocto_DIR) SUBDIRS=$(PWD) clean

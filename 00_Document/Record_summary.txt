@@ -1,0 +1,1137 @@
+==========================================================================================
+				Target:
+
+			  Embedded - App - Web
+
+==========================================================================================
+	KNOWLEGDE COLLECTING
+==========================================================================================
+1. Types of process: 
+- Refer: https://cuongquach.com/daemon-trong-linux-la-gi.html
+
+ 1.1. Interatctive
+ 1.2. Batch (automated)
+ 1.3. Daemons:
+   - Run in Background & Don't need control from user.
+   - Name is ended by "d". ex: inetd, httpd, nfsd, sshd
+
+2. Git
+- git push origin HEAD:refs/for/WORKING (Luu-Dung -> Tuongminh@2020)
+- git status <directoryPath>
+- Git merge vs Git rebase
+- Git fetch vs git pull
+- git log --follow -p -- path-to-file
+- git format-patch CommitID_duoi..CommitID_tren
+- git format-patch -1 <sha>
+- git push origin HEAD:refs/for/dev-cp
+- git push ssh://lcong@master.gerrit.legato:29418/external/qct/mdm9x07 HEAD:refs/for/le-2.0-swi-cp
+- git push ssh://tdongquang@master.gerrit.legato:29418/external/altair/1250/map HEAD:refs/for/3.0.0-swi
+
+2.1 gi acc info:
+- lcong:
+	filter.lfs.clean=git-lfs clean -- %f
+	filter.lfs.smudge=git-lfs smudge -- %f
+	filter.lfs.process=git-lfs filter-process
+	filter.lfs.required=true
+	user.email=lscong@tma.com.vn
+	user.name=lcong
+	color.ui=auto
+
+	$ git config --global user.name "lcong"
+	$ git config --global user.email "lscong@tma.com.vn"
+
+
+- Tri
+	$ git config --global user.name "Tri Dong Quang"
+	$ git config --global user.email "dquangtri@tma.com.vn"
+	$ git config --list
+
+
+
+- Dung
+	$ git config --global user.name "dphamvan"
+	$ git config --global user.email "pvandung@tma.com.vn"
+	$ git config --list
+
+
+
+
+Find branches the commit is on
+- git branch -a --contains <commit>
+
+To search the commit log (across all branches) for the given text:
+- git log --all --grep='...something..'
+
+3. Docker
+
+4. Book
+- Make AVR Programming
+	https://mirror.thelifeofkenneth.com/sites/public.cubiclehero.com/ebooks/Humble%20Book%20Bundle_%20Programmable%20Boards%20by%20Make_/make_avrprogramming.pdf
+
+5. repo tool
+- Refer: https://gerrit.googlesource.com/git-repo
+- Repo is a tool built on top of Git. Repo helps manage many Git repositories, does the uploads to revision control systems, and automates parts of the development workflow.
+- Repo is not meant to replace Git, only to make it easier to work with Git. The repo command is an executable Python script that you can put anywhere in your path.
+
+http://dammedientu.vn/chuan-giao-tiep-spi-va-cach-ket-noi/
+http://dammedientu.vn/gioi-thieu-chuan-giao-tiep-i2c/
+
+
+6. Coding
+
+a. Python:
+    - Check quality: pylint tool
+    - Code rule: Don't mixing CamelCase vs Snake_case
+
+
+7. Key words:
+- No Docs? Reverse Engineer It!
+
+8. ARM
+- EFS:  https://www.keil.com/pack/doc/mw/FileSystem/html/emb_fs.html 
+        https://files.cnblogs.com/files/nliao/OSE_Embedded_File_System_User_Guide.pdf
+   + designed to handle volumes, files and directories and their attributes. It also includes support for handling characterdevice drivers through a file metaphor.
+   + provides a structured means of storing and retrieving data.
+
+- DMA: https://www.elprocus.com/direct-memory-access-dma-in-computer-architecture/
+==========================================================================================
+	ACCOUNT
+==========================================================================================
+
+tdongquang
+Thienlong2019#2
+
+
+
+
+email:
+username: ldnhat1@tma.com.vn
+pass: Tuongminh@2021
+
+Account sierra:
+username: lcong
+pass: khkpCtl1993*
+
+Accout Jasmine = Acc sierra (+domain: sierrawireless)
+
+Mail TMA:
+username: lscong
+Pass: Tuongminh@2021
+
+Account QXDM
+lscong@tma.com.vn
+khkpCtl1993*
+
+Account 192.168.86.85
+Administrator/12345678x@X
+
+///==============================================================================
+ldnhat1@TMA:~$ vncserver
+
+You will require a password to access your desktops.
+
+Password:
+Password must be at least 6 characters - try again
+Password:
+Verify:
+
+New 'TMA:1 (ldnhat1)' desktop is TMA:1
+
+Creating default startup script /home/ldnhat1/.vnc/xstartup
+Starting applications specified in /home/ldnhat1/.vnc/xstartup
+Log file is /home/ldnhat1/.vnc/TMA:1.log
+
+ldnhat1@TMA:~$ 
+
+PW:123456
+==========================================================================================
+	Repo Source
+==========================================================================================
+
+Product         CP manifest file
+-----------------------------------------------------------
+rc51            cp/branches/master/systems/mdm9x05tx10.xml
+wp77xx          cp/branches/master/systems/mdm9x06le20.xml
+wp76xx          cp/branches/master/systems/mdm9x28le20.xml
+hl76xx          cp/branches/master/systems/mdm9x28tx10.xml
+sdx55           cp/branches/master/systems/sdx55le10.xml
+
+http://cgit.legato/manifest/tree/cp/branches/master/systems
+
+
+
+
+
+
+
+
+
+==========================================================================================
+	KNOWLEGDE COLLECTING
+==========================================================================================
+
+Subject: Re: Change in sierra-mdm[dev-cp]: SWIMDM-904 - Enable memory analysis for apps_proc and modem_proc
+ 
+Hi Kevin,
+ 
+Thanks for your information.
+
+I have another question. I have mapped the product with manifest file in CP path, could you please have look and correct me if there are something incorrect.
+ 
+Product          CP manifest file
+rc51                cp/branches/master/systems/mdm9x05tx10.xml
+wp77xx          cp/branches/master/systems/mdm9x06le20.xml
+wp76xx          cp/branches/master/systems/mdm9x28le20.xml
+hl76xx cp/branches/master/systems/mdm9x28tx10.xml
+sdx55 cp/branches/master/systems/sdx55le10.xml
+ 
+Thanks and best regards,
+Kieu.
+From: "Kevin Walton" <kwalton@sierrawireless.com>
+To: tqkieu@tma.com.vn
+Sent: Wednesday, January 15, 2020 3:32:16 PM
+Subject: RE: Change in sierra-mdm[dev-cp]: SWIMDM-904 - Enable memory analysis for apps_proc and modem_proc
+
+Quick comment – RC76xx used to be named HL76xx. Yes, RC76xx is supported by CP.
+
+
+
+
+
+
+
+
+
+
+
+
+
+==========================================================================================
+	DAILY RECORDING
+==========================================================================================
+Day 1:
+
+Step 1: Get Trainning documents From Thong Nguyen
+
+Step 2: Quickly look through Doc_structure and Content.
+
+Step 3: Investigate about "Sierra Wireless Co" ( Products, functions)
+
+Step 4: Refer "WP series" datasheet and protocol standard.
+
+	-> WP series is SoC or MCU0????
+	->\
+
+Step 5: AT-command based messages exchanged between an application and Sierra Wireless products in order to manage GSM/GPRS related events or services.
+(http://mlab.vn/huong-dan-su-dung-module-Sim808.html)
+
+---------------------------
+Technical tearm:
+
+- mangOH.io
+- Legato.io
+	Legato® open source software and mangOH® open source hardware IoT platforms enable developers to focus on building value-add applications quickly that improve the user experience, operational efficiency, and help businesses take advantage of the IoT.
+
+- CF3 Factor: (Size, Footprint, Socket)
+	https://www.sierrawireless.com/products-and-solutions/embedded-solutions/future-proof-form-factors/
+
+- AirVantage:
+	https://www.sierrawireless.com/products-and-solutions/sims-connectivity-and-cloud-services/iot-cloud-platform/
+
+- IoT Gateway:
+	https://www.thegioimaychu.vn/blog/tong-hop/iot-gateway-la-gi-y-nghia-va-chuc-nang-van-hanh-cua-thiet-bi-nay-p2134/
+
+- Software platform vs hardware platform.
+
+- Sandbox:
+
+- ARM Cortex-A5:
+
+- M2M:
+	https://infochief.com.vn/blog/machine-machine-la-gi-phan-biet-m2m-va-iot.html
+
+- Snap-in socket:
+
+- GPIO (General Purpose Input Output)
+
+
+
+==========================================================================================
+Day 2:
+
+Step 1: Investigate "Cellular network(Mobile network)"
+
+Step 2: Son Nguyen shows overview about "WP serries - legato position" 
+	Content:
+
+---------------------------
+Technical tearm:
+
+- GSM: Gloabl System for Mobile (2G technology)
+	(https://slideplayer.com/slide/7263417/)
+	+ MS: Mobile station <=> Handset.
+	+ BTS: The Base Transceiver Station
+
+- GPRS: General Packet Radio System (2.5G technology, Belong to 2G)
+
+- SIM: Subscriber Identity Module (https://www.slideshare.net/Vutang38/nhom1-sim)
+
+- Song dien tu: (https://vi.wikipedia.org/wiki/B%E1%BB%A9c_x%E1%BA%A1_%C4%91i%E1%BB%87n_t%E1%BB%AB)
+	+ Song vo tuyen(radio) : Buoc song: 1 - 10^3 (m) Frequency: 3kHz -300GHz
+		(https://vatlypt.com/song-vo-tuyen-la-gi-cach-truyen-thong-tin-lien-lac-bang-song-vo-tuyen.t270.html)
+
+	+ Anh sang: Buoc song: 400 nm - 700 nm
+
+
+
+==========================================================================================
+Day 3:
+
+Step 1: Vinh Vo show overview about "Cellular network - SMS - AT command"
+	Content:
+ 		- /Day 2 - Cellular Network & SMS/Day 2 - Cellular Network/2G_3G_4G.ppt
+		  > Some concept:
+			+ 2G(GSM, GPRS, EDGE), 3G(UMTS,..), 4G(LTE).
+			+ Radio-based technology, Cell, BTS, MS, SIM, MIMO(multi input-multi output: multi aenten).
+			+ Uplink, Downlink, handoff( optimize during change Cell station),..
+			+ Frequency Band( B1,B2,B3....)
+		  > During 2G,3G,4G development time, "Network Architecture" changed as Below: 
+			(MS,SIM)-(BSS: Base Stattion Subsystem)-(NSS: Network and Subsytem Station)
+  			+ GSM (support Voice,SMS) - "Circuit Domain" is less changed.
+			+ IP services - "Packet Domain" is change a lot.
+
+		- /Day 2 - Cellular Network & SMS/Day 2 - SMS/Short Message Service_Kha.pptx
+
+Step 2: Start up with mangOH Yellow(WP7607).
+	Content:
+		- Switch "Power" : use while connecting Battery; (switch OFF -> while using USB).
+		
+		- Auto Install "leagato AF" with "leaf" tool: "https://docs.legato.io/latest/confLeaf.html"
+ 		   + Install leaf;
+		   + Install some sw...
+		   + setup profile ( acording to you Target ex: wp77xx, wp76xx,..)
+			* Note: Install wp76xx profile as guide:
+		   		--> Could not find gdbus-codegen  --> Install : sudo apt-get install libglib2.0-dev
+			* Note: setup wp77xx(ONLY refer):http://mangoh.io/uploaded-documents/Reference/mangOH%20Yellow/Discover/Getting%20Started/41113347%20mangOH%20Yellow%20GSG%20-%20HTML5-Responsive%20HTML5/#t=41113347_mangOH_Yellow_GSG_-_HTML5%2FInstall_Leaf_and_Build_mangOH_Software%2FInstall_Leaf_and_Build_mangOH_Software.htm
+
+
+		- Write, Build, Install, Run "helloWorld" app: "https://docs.legato.io/latest/getStartedHW.html"
+		   + Addition info: "https://mangoh.io/tutorials-basics"
+
+		- Console Access: http://mangoh.io/uploaded-documents/Reference/mangOH%20Yellow/Discover/Hardware%20User%20Guide/41113427%20mangOH%20Yellow%20UG%20-%20HTML5-Responsive%20HTML5/#t=41113427_mangOH_Yellow_UG_-_HTML5%2FConsole_Access%2FConsole_Access.htm
+
+
+---------------------------
+Technical tearm:
+- Nothing.
+
+
+
+==========================================================================================
+Day 4:
+
+Step 1: Agile meeting: 3 times/week (10am 2-4-6)
+
+Step 2: Nguyen Nguyen share about AVMS (AVMS_FOTA_Demo_on_HL8.pptx)
+	Content:
+		- What is AirVantage? : Cloud server for "SierraWireless modules", which need to conect to Internet by SIM or WIFI.
+		- Usage:
+			+ Monitoring;
+			+ Create job -> modules( set job and Wakeup through Airvantage).
+		- Setup:
+			+ System(Gateway & Subcription): when create "System", ONLy adding "Gateway". Update Subcription lately.
+		- Practice:
+			+ Read exactly <Target> manual. ex: 4118047_WPx5xx-76xx-77xx_AT_Command_Reference_r6.pdf
+
+
+---------------------------
+Technical tearm:
+- APN: Nha mang cung cap 1 IP cho device luot web :) 
+
+
+
+==========================================================================================
+Day 6-7: WeeK 2
+http://192.168.86.103/tmawiki/index.php/Legato
+
+Step 1: Install package
+$ sudo apt-get install bison build-essential chrpath cifs-utils cmake coreutils curl desktop-file-utils diffstat docbook-utils doxygen fakeroot flex g++ gawk gcc git gitk graphviz help2man libgmp3-dev libmpfr-dev libncurses5-dev libreadline-dev libsdl1.2-dev libtool libxml2-dev libxml-libxml-perl make m4 ninja-build python-jinja2 python-pip python-pyparsing python-pysqlite2 quilt samba scons sed subversion texi2html texinfo unzip wget android-tools-fastboot android-tools-adb repo openssh-server vim dh-autoreconf gperf
+
+
+Step 2: Build Linux distro with yocto
+- Connect in anyconnect: VPN: sslvpn.da.sierrawireless.com
+- get source for wp76xx.
+
+
+Issue 1: "Error: bash is not set as default provider for /bin/sh"
+- Root: https://stackoverflow.com/questions/24102031/bash-is-not-recognized
+
+- Solution: https://unix.stackexchange.com/questions/442510/how-to-use-bash-for-sh-in-ubuntu
+		$ sudo dpkg-reconfigure dash
+		   -> answer “yes” to keep dash as /bin/sh or “no” to switch to bash.
+
+Issue 2: ERROR: Function failed: do_add_hash.... log.do_add_hash.27519 -> inside :boot_signer: line 8: java: command not found
+- Root & Solution: https://forum.legato.io/t/wp76xx-linux-distribution-compilation-issue-lk-1-3-0-r2-do-deploy/4083
+		$ sudo apt-get install openjdk-8-jdk
+
+
+Issue 3: zImage-initramfs-swi-mdm9x28.bin': No such file or directory
+- Solution: Delete "/build_bin/tmp" and rebuild "make image_bin"
+
+Step 3: Flash to board:
+		$ cd <image_folder>
+		$ swiflash -m “wp76xx” -i yocto_wp76xx.4k.cwe 
+
+Step 4: check info:
+
+	$ ssh root@192.168.2.2
+	$ cm info
+	$ microcom /dev/ttyAT
+		run AT cmd:
+		$ ati8
+		$ openssl version
+
+
+
+==========================================================================================
+Day 8-10
+
+
+Step 1: Try to update openssl's version in yocto.
+	- Investigate Yocto & Bitbake User manual.
+
+Step 2: Change openssl_1.0.2.p -> openssl_1.0.2o
+
+openssl_1.0.2p.bb
+
+
+Command:
+repo forall -c 'git reset --hard ; git clean -fdx' 
+
+diff -r openssl openssl_dload/ &>diff.patch
+
+Er for MD5 and SHA1 you can do
+$md5sum <file_name>
+
+for md5sum and
+$sha1sum <file_name>
+
+
+==========================================================================================
+Day 11 (Nov 26)
+
+
+Step 1: Try to update openssl's version in yocto.
+	- Copy openssl folder from poky to swi;
+	- change all 1.0.2p->1.0.2q
+	- change md5sum&sha1sum in 1.0.2q.bb
+	- remove 1 file patch in bbapend file.
+
+Step 2: Investigate Gerrit & jenkins:
+
+*Gerrit tool: Base on git.
+- Modify source-code process:
+
+	1. Clone source
+	    $ git clone < >
+	2. Edit files
+	3. Check coding rule:
+	    $ git diff
+	    $ git status
+	    $ git add
+	4. Commit change: 
+	    $ git commit : message follow a rule.
+	5. git dir ??? lam r biet.
+	6. git commit --amend : auto add changeID to commit message.
+	7. git push, git review ??????
+  Note: When fail in reviews. try step 2-3-6-7.
+
+- Review on Gerrit:
+	- Code review (CR): Syntax, solution,.. 	=> Reviewer got it.
+	- Verified: Build success, message.. 		=> CI got it.
+	- Quality Check: Code coverage,security,..	=> CI got it.
+
+
+* Jenkins tool: A part of CI server(JK,Gerrit,...)
+- Check "Build failure":
+	1. Go to "jod link" in comment.
+	2. View "Console output".
+	3. Search "FAILURE".
+	4. Go to "target link" by search where this target "Starting building:"
+	5. Determind where this failure come from?
+
+
+Step 3: Build legato (update SOTA)
+	1. cd ~/WSpace/
+	2. leaf search -t wp76xx -t latest
+	3. leaf setup wp76dev -p swi-wp76_4.6.0.rc1
+	4. cd  leaf-data/wp76dev/wp76-legato-src/
+	5. repo init -u "git://gerrit.legato/manifest" -m legato/branches/master.xml
+	6. repo sync
+	7. cd legato
+	8. make clean -> make wp76xx
+	9. leaf shell
+	10. ./bin/update build/wp76xx/system.wp76xx.update 192.168.2.2
+ -> check legato version.
+
+==========================================================================================
+Day 12-13-14 (Nov 29)
+
+Step 1: Copy install_package from jasmines2 (connect VPN + access to Jasmines2 by SC account)
+	- Following Work Instructions on Tool Configuration for Building Qualcomm 9x28 AMSS.odt
+
+Step 2: Clone FW_repository wp76xx, wp7xx
+	- wp77xx
+	  $ mkdir and cd to mdm9x06le20_wp77xx
+	  $ repo init -u git://gerrit-legato/manifest -m cp/branches/master/systems/mdm9x06le20.xml
+	  $ repo sync
+
+	- wp76xx 
+	  $ mkdir and cd to mdm9x28le20_wp76xx
+	  $ repo init -u git://gerrit-legato/manifest -m cp/branches/master/systems/mdm9x28le20.xml
+	  $ repo sync
+
+	=> cd /mdm9x__/
+	   $ mktarg boot 	=> generating bin/9x07/nand/LAATMNAZA/sbl1.mbn
+	   $ mktarg rpm  	=> generating rpm/rpm/AAAAANAAR/rpm.mbn
+	   $ mktarg tz   	=> generating bin/MARAANAA/tzbsp_no_xpu.mbn
+	   $ mktarg mpss	=> generating
+	   $ mktarg common	=> generating
+		5 = 1 mktarg all
+
+==========================================================================================
+Day 15-16 (Dec 2-3)
+
+Step 1: Reinstall "llvm Toolchain" follow Trung_Nguyen:
+	- Get the toolchain from
+		//jasmine2/Projects-1/Engineering/Firmware/Qualcomm/Software/Qualcomm_Snapdragon_LLVM_ARM_Toolchain/Snapdragon_SD_LLVM_ARM_LNX_4_0_Installer_40300_1.tar
+
+	- Extract and install
+	  $ sudo mkdir -p /pkg/qct/software/llvm/release/arm/4.0.3
+	  $ tar -xvf Snapdragon_SD_LLVM_ARM_LNX_4_0_Installer_40300_1.tar
+	  $ sudo tar -xvf Snapdragon-llvm-4.
+
+
+==========================================================================================
+Day 17 -23 (Dec 4 - 12)
+
+Step 1: Repo init & sync again "mdm9x28le20"
+
+Step 2: $ make image_src
+	$ cd mdm9x28
+	$ ./mktarg.sh all
+
+Step 3: Check FW's info:
+	$ cd /home/ldnhat1/Workspace/03_wp_Team/mdm9x28le20/sierra/tools/common/cwe/wp_4g4k
+	$ swiflash -m “wp76xx” -i boot_modem.cwe
+
+
+Issue: Can't update firmware => 
+	at!impref?
+	at!unlock="A710"
+	at!impref="00.00.00.00"
+
+
+
+
+
+
+
+
+repo init -u git://gerrit-legato/manifest -m cp/branches/master/systems/mdm9x05tx10.xml
+repo init -u git://gerrit-legato/manifest -m cp/branches/master/systems/mdm9x06le20.xml
+repo init -u git://gerrit-legato/manifest -m cp/branches/master/systems/sdx55le10.xml
+
+http://cgit-legato/manifest/tree/mdm9x28/branches/mdm9x28r20_2.5_wp76xx.xml
+-> repo init -u git://gerrit-legato/manifest -m mdm9x28/branches/mdm9x28r20_2.5_wp76xx.xml
+==========================================================================================
+Day 24 - 26 (Dec 13-17)
+
+Knowledge:
+==========
+git remote -v
+git remote show origin
+git config --global --list
+
+* Proccess:
+git checkout dev-cp
+git pull origin
+git checkout -b <ticket_name>
+[Modify somthing -> commit]
+git push origin HEAD:refs/for/dev-cp
+
+
+
+Task: Switch to SWIMDM-592
+=====
+
+Step 1: Init & sync "mdm9x28le20"
+
+Step 2: Make "image_src" & ./mktarg all.
+
+Step 3: Reproceduce ISSUE on "wp7605"
+	- create scripts.
+	- Face a problem in serial cable and USB port : script interupted continously by dissconecting.
+	  =>> change cable and port
+
+
+
+==========================================================================================
+Day 27 (Dec 18)
+
+Knowledge:
+
+
+Task: 
+=====
+
+1. SWIMDM-592
+
+Step 1: Get re-proceduce log.
+Step 2: Get Fixed.log
+Step 3: Push Test evidence to Jira.
+Step 4: Push code to gerrit.
+	- Face an issue: "Service not enabled"
+	  =>> Add "master" to url in ".git/config"
+	From: 
+		url = ssh://tdongquang@gerrit.legato:29418/sierra-mdm
+	To:
+		url = ssh://tdongquang@master.gerrit.legato:29418/sierra-mdm
+
+2. Create Markdown files
+
+Step 1: Collect Mr.Dinh's experiences
+Step 2: Create md files follow SWI 540 & "/ifs/RF Command"
+
+==========================================================================================
+Day 28-29 (Dec 19-20)
+
+
+Knowledge:
+- Unlock At level:
+	+ Level 2: AT!ENTERCND="A710"
+	+ Level 3: AT!UNLOCK="A710"
+
+Task: 
+=====
+
+0. Join TMA Overview.
+
+
+1. SWIMDM-592
+
+Step 1: Start review.
+
+
+2. Create Markdown files
+
+Step 1: re-check md files.
+Step 2: Create Test evidence.
+Step 3: Create pdf files.
+
+
+
+
+
+
+
+
+==========================================================================================
+Day 30 (Dec 23)
+
+
+Knowledge:
+- Init process: SystemV or Systemd.
+- apache
+- socket: La API, kết nối các ứng dụng để truyền và nhận giữ liệu giữa 2 apps (trong môi trường có kết nối Internet).
+ Phan Loại:
+	+ Stream Socket: use TCP.
+	+ Websocket: use TCP.
+	+ Datagram Socket: use UDP.
+	+ Unix socket: between 2 apps on a computer. Active on OS.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+flash_hal_nandc_predef_bam_exec.c
+
+
+/*
+ * Prepare the read bad block marker command pointer list
+ */
+void hal_nandc_bam_00_30_bb_marker_exec
+
+
+/home/ldnhat1/Workspace/03_wp_Team/mdm_9x28/mdm9x28/modem_proc/core/api/services
+
+==========================================================================================
+.................
+==========================================================================================
+Day xx (2020 Feb 3)
+
+Knowledge:
+- Git:
+	+ "$git pull origin" --> branch "dev-cp" was NOT updated.
+	--> Need "$git checkout dev-cp" -> "$git pull" ===> updating "dev-cp" in local.
+
+
+#include "/home/ldnhat1/Workspace/03_wp_Team/mdm_9x28_2/mdm9x28/modem_proc/core/api/services/msg_diag_service.h"
+
+
+
+
+
+
+
+
+
+
+
+==========================================================================================
+.................
+==========================================================================================
+Day xx (2020 Feb 12)
+
+Knowledge:
+- cách xóa pass của module wp:
+FYI smb://192.168.86.85/wp76xx%20project/Documents/Tips/erase_pass.txt
+
+
+
+
+
+
+
+
+==========================================================================================
+.................
+==========================================================================================
+Day xx (2020 Feb 13)
+
+Knowledge:
+
+Issue 1: Lỗi license vì build thiếu option default_envcd to ./mdm9x05 and execute the following command to build everything:
+./mktarg.sh default_env all
+
+*to see a list of build options enter just the command:
+./mktarg.sh
+
+*to clean all the builds, enter
+./mktarg.sh default_env all clean
+
+*to build just a specific image (for example, trustzone), enter:
+./mktarg.sh default_env tz
+
+*to clean just a specific image (for example, trustzone), enter:
+./mktarg.sh default_env tz cleanai bị lỗi tương tự thì thử lại với option default_env
+
+
+
+
+
+
+
+
+==========================================================================================
+.................
+==========================================================================================
+Day xx (2020 Feb 18)
+
+Knowledge:
+
+Issue 1: Re-flash ALL
+Step 1: Get files in "smb://192.168.86.85/automation/Tenuto_Framework/Firmware_Driver/master/Package-19.02.0.rc4/WP76xx"
+
+Step 2: Flash theo thứ tự appboot -> FW(9999) -> linux->Legato
+
+
+
+
+
+
+
+
+==========================================================================================
+.................
+==========================================================================================
+Day xx (2020 Feb 24)
+
+Knowledge:
+
+Issue 1. Set up ENV for MDM9x05
+Refer: https://confluence.sierrawireless.com/display/OEM/Work+Instructions+on+Tool+Configuration+for+Building+Qualcomm+9x05+AMSS
+
+sudo apt-get install git (only if fresh OS install)
+cd ~/
+mkdir cp-utils; cd cp-utils
+git clone git://gerrit.legato/tools/cp-utils.git
+cd build/install
+sudo ./install.sh MDM9X05 RMD (this will automatically mount the network drive)
+
+
+
+
+
+
+
+
+==========================================================================================
+.................
+==========================================================================================
+Day xx (2020 Mar 19)
+
+Knowledge:
+- 0:EFS2	MPSS EFS file system
+
+
+
+
+
+
+
+
+
+==========================================================================================
+.................
+==========================================================================================
+Day xx (2020 Mar 19)
+
+Knowledge:
+- FAT : http://www.ntfs.com/fat-systems.htm
+- Doxygen: 
+- 
+
+
+
+
+
+
+
+
+==========================================================================================
+.................
+==========================================================================================
+Day xx (2020 Mar 27)
+
+WP-Lscong:
+- SWIMDM-775: still analyze BAM issue.
+- SWIMDM-607 blocked by SWIMDM-432(In review)
+- SWIMDM-772 blocked by SWIMDM-680(New)
+
+
+
+
+
+
+
+
+==========================================================================================
+.................
+==========================================================================================
+Day xx (2020 Apr 06)
+lien quan den ticket to Qualcomm: 
+https://confluence.sierrawireless.com/pages/viewpage.action?spaceKey=OEM&title=Requesting+CRs+from+Qualcomm
+
+
+
+
+
+
+
+
+
+==========================================================================================
+.................
+==========================================================================================
+Day xx (2020 MAY 18)
+
+Ko ssh & access AT port zô Board đc
+->
+at!unlock="A710"
+at!usbcomp?
+
+nếu 0008010D hoặc 0008010F thì ok
+
+at!usbcomp=1,1,0008010D
+at!reset
+
+
+
+
+
+
+==========================================================================================
+.................
+==========================================================================================
+Day xx (2020 June 16)
+
+lỗi khi add 1 file header vào file atplus.c.
+	-> bị lỗi re-define 
+	
+	=> Root cause: có thể do compiler ngu
+	   Solution: thay đổi thứ tự header giống file atsd.c
+
+
+
+
+
+==========================================================================================
+.................
+==========================================================================================
+Day xx (2020 June 29)
+
+Setup and configure QXDM:
+- https://confluence.sierrawireless.com/display/LEGATO/Getting+Started+-+ThreadX
+- https://issues.sierrawireless.com/browse/QTI9X07-4227 
+
+
+
+
+
+
+
+
+==========================================================================================
+.................
+==========================================================================================
+Day xx (2020 July 09)
+
+
+--------------
+int a = address of typeX;
+--------------
+Usage: (typeX *) a =...;
+
+
+--------------
+int var;
+var =0; 
+(void) var;
+--------------
+Usage: No operation -> Only giu cho cho var, cheat waring "unusing variable".
+refer: https://stackoverflow.com/questions/2198950/why-is-void-0-a-no-operation-in-c-and-c
+
+
+
+
+
+
+
+
+==========================================================================================
+.................
+==========================================================================================
+Day xx (2020 July 20)
+
+*** In AT 
+#check mismatch version: to enale radio ( check by "cm radio"
+at!unlock="A710"
+
+at!impref?
+
+#set version:
+at!impref="00.00.00.00"
+
+
+
+#Check
+at+cgdcont?
+
+# Remove
+at+cgdcont=<number> 
+
+#Set Sim:
+
+-Viettel: at+cgdcont=1,"IPV4V6","v-internet",
+
+-Sierra: at+cgdcont=1,"IPV4V6","lp.swir",
+
+-Sierra: at+cgdcont=1,"IPV4V6","lp.fota.swir",
+
+
+
+*** In root:
+
+# check profile index:
+
+# set index by: cm data profile <number>
+
+
+
+
+
+
+
+==========================================================================================
+.................
+==========================================================================================
+Day xx (2020 Sep 15)
+                       ------------------
+		       |HL78XX GUIDELINE|
+                       ------------------
+
+1. GET source for HL:
+Version 4.6:
+	$repo init -u "git://gerrit.legato/manifest" -m "products/hl78/branches/uLegato-3.x/systems/cs2-merge.2.xml"
+	$repo sync
+
+
+2. BUILD source:
+	$make
+
+
+3. UPDATE FW for HL:
+	$sudo make sft_install_full DEST=/dev/ttyUSB0 or ttyUSB1
+
+
+
+
+4. DEBUG on CLI PORT:
+
+STEP 1: Enable module ID
+
+On CLI port:
+	>slog m
+	>slog p <module ID> 1
+	>slog u 1
+
+
+On AT port:
+	at+switracemode=RnD
+	AT!UNLOCK="A710"
+	at%setacfg="manager.uartMapping.A,SFP_LOGGER"
+	at+cfun=1,1
+
+STEP 2: Read debug log with HL tool:
+
+On Terminal:
+	$sudo python /WS/01_FW-Source/01_product/hl78/tools/sfp/parseSfpLogs.py -o64 /dev/ttyUSB1 /WS/01_FW-Source/01_product/hl78/map/build/dictionary.txt 1
+
+
+
+***NOTE: Back về CLI port
+On AT port:
+	AT!UNLOCK="A710"
+	at%setacfg="manager.uartMapping.A,CLI_AT"
+
+
+
+
+
+
+==========================================================================================
+.................
+==========================================================================================
+Day xx (2020 Sep 20)
+
+MEMORY LEAK SOVLE:
+
+Decription: 
+- Crash module after stress test.
+- Memory used increase <> Free memory decrease ( check by ps,free command).
+
+Detect:
+- Find which function running when memory leak;
+- Are there any notification of that function? if yes, which is function throw it?
+- variable type is pointer type that can be allocated by another funtion.
+- that caribale is a local funtion.
+
+Solution:
+- find time when this variable not used any more.
+- try to de-allocate by another api or free function. 
+
+
+
+
+
+==========================================================================================
+.................
+==========================================================================================
+Day xx (2020 Oct 2)
+
+Training material:
+smb://192.168.86.85/d/New%20Member%20Training
+
+
+
+
+==========================================================================================
+.................
+==========================================================================================
+Day xx (2020 Nov 27)
+
+Build bare-metal for raspberry pi:
+
+1: What Target chip?
+- CPU Core: 
+	+ Arm Coretex-A7 -> ARMv7 -> Arm 32bit.
+	+ Arm Coretex-A53 -> ARMv8 -> Arm 64bit.
+
+
+2. Choose Cross Toolchain
+-llvm, mpis, linaro,...
+- RASP pi2 -> arm32 ->chon ARMGNU ?= arm-linux-gnueabihf.
+
+
+3. Write assembly:
+- seach "<architect name> Assembly Instruction set"
+- Remeber name of registers and opcode.
+
+
+
+
+
+
+
+==========================================================================================
+.................
+==========================================================================================
+Day xxx (2020 Dec 24)
+
+Plan for revising:
+
+Inter:
+- overview: (Document)
+
+Practice:
+- Organize the resource. OK
+- Write exactly guide line for cross-compile. OK...hmmmm
+- linux driver.
+
+English:
+- collect the vocabulary.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#-------------------------------------------------------------------------- END --------------------------------------------------------------------------#

@@ -1,0 +1,57 @@
+
+CURRENT DIR
+|
+|___ linux-raspberrypi-kernel_1.20201126-1 (Deleted)
+|      download from (https://github.com/raspberrypi/linux/releases) acording date.
+|
+|___ tools-master (Deleted): download from (git clone https://github.com/raspberrypi/tools).
+|
+|___ .config : get from rasp board (Linux raspberrypi 5.4.79-v7+ #1373 SMP Mon Nov 23 13:22:33 GMT 2020 armv7l GNU/Linux).
+
+
+# INFORMATION SUMMARY
+- DESCRIPTION: Try to cross-compile and install My usb driver example into Raspberry pi2.
+
+# CONTENT:
+- Step1: Install RaspOS 
+- Step2: Check kernel verion.
+- Step3: Download kernel source and toolchain.
+            + https://github.com/raspberrypi/linux ( because install RaspOS), check exactly version (by date).
+            + sudo apt install crossbuild-essential-armhf
+- Step4: clean and build kernel. ( remember install some essential packages, ex: ...)
+	    $ make mrproper ( respective with "make clean; make distclean").
+            + Old config:  Inside kernel directory,
+                $ Come to rasp: $sudo modprobe configs -> $zcat /proc/config.gz > /tmp/.config -> copy .config to kernel dir. comeback to kernel DIR.
+	    + New config: (default for your rasp).
+                $ KERNEL=kernel7
+		$ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- bcm2709_defconfig
+	    $ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j 12
+- Step5: change CROSS vs KERNEL dir in Makefile.
+- Step6: Build and install driver:
+            $ make
+- Step7: Copy output file to rasp, then come to rasp.
+            $ insmod usb_driver.ko
+
+
+
+ERROR:
+1. Pathxxx/bin/arm-bcm2708-linux-gnueabi-gcc: not found
+-> Solved: sudo apt-get install lib32z1-dev
+2. Can't compile kernel to "-v7+" -> error (usb_driver: disagrees about version of symbol module_layout)
+-> change CONFIG_LOCALVERSION="-v7+"
+3. Always get above error when compile by others cross_compiler????????
+-> use rasp 's cross_compiler instead ( sudo apt install crossbuild-essential-armhf).????????
+
+
+DEMO USB driver:
+- Hardware: Raspberry pi 2 and "usb bluetooth".
+- USB device info: ID 0a12:0001
+- Default using driver "btusb " -> After insmod driver, Should remove this driver before "first-time" plug in USB device.
+  -> Note: btusb will be inserted automatically again, But not need to rmmod again, Because our usb device still get our driver next times Not btusb.
+  -> if we rmmod our driver, when we plug device, It will use btusb agin as default.
+
+- Tried usb storage (my 4gb USB), but it use usb_storage as default and I can't rmmod this driver( it is built in module), That means the module was compiled into the kernel. If you want to be able to unload it, you will have to compile a new kernel and have it built as a dynamically (un)loadable module instead.
+
+# REFER:
+- https://techfortalk.co.uk/2020/02/21/cross-compiling-custom-linux-kenel-driver-for-rasberry-pi-platform/
+- https://www.raspberrypi.org/documentation/linux/kernel/building.md

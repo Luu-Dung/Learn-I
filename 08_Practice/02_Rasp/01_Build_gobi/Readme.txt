@@ -23,6 +23,12 @@
             $ insmod GobiNet.ko
 
 
+
+ERROR:
+1. Pathxxx/bin/arm-bcm2708-linux-gnueabi-gcc: not found
+-> Solved: sudo apt-get install lib32z1-dev
+
+
 # REFER:
 - https://techfortalk.co.uk/2020/02/21/cross-compiling-custom-linux-kenel-driver-for-rasberry-pi-platform/
 - https://www.raspberrypi.org/documentation/linux/kernel/building.md

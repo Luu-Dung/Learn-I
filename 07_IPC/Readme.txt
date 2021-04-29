@@ -1,6 +1,7 @@
 Refer: https://opensource.com/article/19/4/interprocess-communication-linux-storage
         https://condor.depaul.edu/mkalin/
         https://ttl.engineering/giao-tiep-lien-tien-trinh-inter-process-communication-ipc-trong-he-dieu-hanh-linux/
+        https://en.wikipedia.org/wiki/Inter-process_communication
 
 In C to clarify the following IPC mechanisms:
 • Shared files

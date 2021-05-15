@@ -16,7 +16,7 @@
    - Name is ended by "d". ex: inetd, httpd, nfsd, sshd
 
 2. Git
-- git push origin HEAD:refs/for/WORKING (Luu-Dung -> Tuongminh@2020)
+- git push origin HEAD:refs/for/WORKING_2 (Luu-Dung -> Tuongminh@2020)
 - git status <directoryPath>
 - Git merge vs Git rebase
 - Git fetch vs git pull

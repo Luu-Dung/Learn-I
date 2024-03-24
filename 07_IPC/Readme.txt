@@ -10,7 +10,7 @@ In C to clarify the following IPC mechanisms:
 • Message queues
 • Sockets
 • Signals
-
+    
 Core concepts:
 - Different processes, by default, do not share memory.
 
@@ -32,8 +32,9 @@ Byte stream
     - pipe(channel-based):
         + named pipe (FIFO): Có thể  tính là "Shared file"
              https://www.geeksforgeeks.org/named-pipe-fifo-example-c-program/
-             Appears as a file (FIFO FILE) on the local storage.
-             DO NOT Race condition
+            A FIFO special file is created by calling mkfifo() in C
+             -> Appears as a file (FIFO FILE) on the local storage.
+             -> DO NOT Race condition
         + unamed pipe:
              create 2 file descriptor (fd[2]) for pipechannel -> init channel by pipe(fd)
              -> fd[0] for reader, fd[1] for writer -> in reader, close fd of writer and nguoc lai.

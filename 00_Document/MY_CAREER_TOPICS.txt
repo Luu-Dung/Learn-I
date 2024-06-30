@@ -1,0 +1,107 @@
+MY CAREER TOPICS
+
+I. EMBEDDED FIELD:
+
+1. OS
+Linux embedded
+Android embedded
+QNX
+RTOS
+ - Architecture OS 
+	+ AOSP:
+	+ Linux OS:
+ - Customizes OS
+	+ Build OS
+	+ Add/Remove Packages
+	+ Add/Remove drivers
+ - Application develop
+
+ - Debug/Trace
+	+ Trace32
+	+ QXDM
+
+
+2. Automotive
+AUTOSAR
+SDV
+VSS
+AGRiculture
+
+3. IoT
+
+4. Hardware specifics
+ - SoC, MCU, MPU
+ - ARM, MIPS, Powerc, 
+ - Qualcomm, TI, Telechips, Renesas,..
+ - Platform devices:
+	+ USB
+	+ Serial: UART, RS232, RS485,..
+	+ Ethernet
+
+II. NETWORK
+1. Definition
+OSI model
+TCP/UDP
+DNS & DHCP
+Cellular
+WIFI/Bluetooth
+
+
+2. Protocol
+MQTT (paho, QoS, TLS, ...)
+HTTP/HTTPs
+gRPC
+Protobuf
+SOME/IP
+
+III. SECURITY:
+SELinux
+Password
+TLS (Certificate)
+Symmetric key(AES,..)
+Asymmetric key(RSA,..)
+
+III. PROGRAMMING:
+Mindset
+	- CPP syntax set (modern CPP + SonaQ rules,..)
+	- OOP Design (Design pattern, Meta programming, Template,..)
+	- SOLID principle
+
+Debug/Trace
+	+ GDB
+	+ Valgrind
+
+IV. ARCHITECTURE LEVEL:
+APP Design
+Framework Design
+System Design
+
+V. FOREIGN LANGUAGES:
+1. English: 
+	- Target 800 Toeic.
+	- Vocabulary: 600 voca Toeic + 900 Voca Ielts.
+	- Basic communication patterns.
+	- Slang worlds.
+2. 日本語
+	- Complete N5's syntax.
+	- Number, Quantity, weekdays, months
+	- Complete Listen homeworks.
+	- Target N4's syntax
+
+
+VI. SOFT SKILLS
+- Focus 1 short-term ( 15 - 20mins, break 5 mins)
+- Leaning and knowledge systematic
+- Management skills
+- Mentor skills
+
+
+
+
+
+
+
+
+
+
+

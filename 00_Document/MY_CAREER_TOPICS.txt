@@ -1,5 +1,12 @@
 MY CAREER TOPICS
 
+Current investigation:
+- Velocitas architechture
+- VSS
+- Kuksa Databroker
+- gRPC
+- PRotobuf
+
 I. EMBEDDED FIELD:
 
 1. OS
@@ -50,9 +57,15 @@ WIFI/Bluetooth
 2. Protocol
 MQTT (paho, QoS, TLS, ...)
 HTTP/HTTPs
-gRPC
-Protobuf
 SOME/IP
+Kulsa broker
+Cap'n proto
+
+2.1 gRPC & Protobuf
+ a. Introduction:
+	- 
+	
+ b. Quick start:
 
 III. SECURITY:
 SELinux
@@ -83,9 +96,10 @@ V. FOREIGN LANGUAGES:
 	- Basic communication patterns.
 	- Slang worlds.
 2. 日本語
-	- Complete N5's syntax.
-	- Number, Quantity, weekdays, months
-	- Complete Listen homeworks.
+	- Done: Complete N5's syntax.
+	- Done: Number, Quantity, weekdays, months
+	- Done: complete Listen homeworks.
+	- Doing JPNT N5.
 	- Target N4's syntax
 
 

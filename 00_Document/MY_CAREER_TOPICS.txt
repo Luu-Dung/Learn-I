@@ -32,7 +32,7 @@ RTOS
 AUTOSAR
 SDV
 VSS
-AGRiculture
+Agriculture
 
 3. IoT
 
@@ -47,7 +47,7 @@ AGRiculture
 
 II. NETWORK
 1. Definition
-OSI model
+OSI model: https://opensource.com/article/22/10/osi-model-network-communications
 TCP/UDP
 DNS & DHCP
 Cellular
@@ -77,8 +77,14 @@ Asymmetric key(RSA,..)
 III. PROGRAMMING:
 Mindset
 	- CPP syntax set (modern CPP + SonaQ rules,..)
-	- OOP Design (Design pattern, Meta programming, Template,..)
-	- SOLID principle
+	- OOP Design:
+		+ Design pattern
+		+ Template Meta programming
+		+ Functor
+	- Design principle:
+		+ SOLID
+		+ Rule of Zero
+		+ Separation of Concern
 
 Debug/Trace
 	+ GDB
